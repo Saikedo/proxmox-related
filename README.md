@@ -49,9 +49,6 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 # Git prompt
 git clone https://github.com/olivierverdier/zsh-git-prompt ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/git-prompt
 
-# Git fast
-git clone https://github.com/oldratlee/hotfiles.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/gitfast
-
 # Autosuggestions
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
