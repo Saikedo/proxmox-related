@@ -41,26 +41,6 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 # Install Powerlevel10k Theme
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
 
-# Change theme
-sed -i 's/^ZSH_THEME=.*/ZSH_THEME="powerlevel10k\/powerlevel10k"/' ~/.zshrc
-
-# Change Plugins
-sed -i '/^plugins=/c\plugins=(\
-  git \
-  yarn \
-  xcode \
-  git-prompt \
-  gitfast \
-  zsh-autosuggestions \
-  zsh-syntax-highlighting \
-  you-should-use \
-  zsh-bat \
-)' ~/.zshrc
-
-
-# Configure
-p10k configure
-
 # Git prompt
 git clone https://github.com/olivierverdier/zsh-git-prompt ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/git-prompt
 
@@ -78,6 +58,23 @@ git clone https://github.com/MichaelAquilina/zsh-you-should-use ${ZSH_CUSTOM:-$H
 
 # zsh-bat
 git clone https://github.com/fdellwing/zsh-bat.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-bat
+
+# Change theme
+sed -i 's/^ZSH_THEME=.*/ZSH_THEME="powerlevel10k\/powerlevel10k"/' ~/.zshrc
+
+# Change Plugins
+sed -i '/^plugins=/c\plugins=(\
+  git \
+  yarn \
+  xcode \
+  git-prompt \
+  gitfast \
+  zsh-autosuggestions \
+  zsh-syntax-highlighting \
+  you-should-use \
+  zsh-bat \
+)' ~/.zshrc
+
 
 # Reload
 source ~/.zshrc
