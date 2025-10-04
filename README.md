@@ -4,6 +4,12 @@ This repository contains notes and scripts related to running Proxmox and relate
 
 ---
 
+## 🚀 Starting Scripts
+```bash
+sudo apt update
+sudo apt upgrade
+```
+
 ## 🚀 Install Docker
 
 ```bash
@@ -29,7 +35,6 @@ newgrp docker
 
 ```bash
 # Install zsh
-sudo apt update
 sudo apt install -y zsh
 
 # Set it as main editor
