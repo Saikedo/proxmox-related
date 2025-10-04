@@ -15,7 +15,13 @@ sudo sh get-docker.sh
 
 # Remove the installer (no longer needed after install)
 rm get-docker.sh
+
+sudo groupadd docker
+sudo usermod -aG docker $USER
+newgrp docker
 ```
+
+
 
 
 ## Terminal Setup
