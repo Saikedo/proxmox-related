@@ -22,6 +22,62 @@ rm get-docker.sh
 
 
 ```bash
+# Install zsh
 sudo apt update
 sudo apt install -y zsh
+
+# Set it as main editor
+chsh -s $(which zsh)
+
+# Install Oh-My-Zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# Install Powerlevel10k Theme
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+
+# Change theme
+sed -i 's/^ZSH_THEME=.*/ZSH_THEME="powerlevel10k\/powerlevel10k"/' ~/.zshrc
+
+# Change Plugins
+sed -i '/^plugins=/c\plugins=(\
+  git \
+  yarn \
+  xcode \
+  git-prompt \
+  gitfast \
+  zsh-autosuggestions \
+  zsh-syntax-highlighting \
+  you-should-use \
+  zsh-bat \
+)' ~/.zshrc
+
+
+# Configure
+p10k configure
+
+# Git prompt
+git clone https://github.com/olivierverdier/zsh-git-prompt ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/git-prompt
+
+# Git fast
+git clone https://github.com/oldratlee/hotfiles.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/gitfast
+
+# Autosuggestions
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+# Syntax highlighting
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+# You-should-use
+git clone https://github.com/MichaelAquilina/zsh-you-should-use ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/you-should-use
+
+# zsh-bat
+git clone https://github.com/fdellwing/zsh-bat.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-bat
+
+# Reload
+source ~/.zshrc
+```
+
+To reconfigure styles at any point
+```bash
+p10k configure
 ```
