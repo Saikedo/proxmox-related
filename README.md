@@ -29,7 +29,7 @@ newgrp docker
 
 ## Docker Portainer Agent
 ```bash
-#!/usr/bin/env bash
+bash <<'SCRIPT'
 set -euo pipefail
 
 echo "→ Working in: $PWD"
@@ -60,13 +60,14 @@ YAML
 
 echo "✓ Wrote $COMPOSE_FILE"
 
+# Find compose command
 if command -v docker >/dev/null 2>&1 && docker compose version >/dev/null 2>&1; then
   COMPOSE_CMD="docker compose"
 elif command -v docker-compose >/dev/null 2>&1; then
   COMPOSE_CMD="docker-compose"
 else
-  echo "❌ Docker Compose not found."
-  exit 1
+  echo "❌ Neither 'docker compose' nor 'docker-compose' is available. Please install Docker Compose."
+  exit 1  # exits this subshell only; your SSH session stays alive
 fi
 
 echo "→ Running: $COMPOSE_CMD up -d"
@@ -75,7 +76,8 @@ echo "→ Running: $COMPOSE_CMD up -d"
   $COMPOSE_CMD up -d
 )
 
-echo "🎉 Done! Portainer Agent is running on port 9001."
+echo "🎉 Done! Portainer Agent should now be running (port 9001)."
+SCRIPT
 ```
 
 
