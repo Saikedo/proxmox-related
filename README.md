@@ -27,7 +27,56 @@ sudo usermod -aG docker $USER
 newgrp docker
 ```
 
+## Docker Portainer Agent
+```bash
+#!/usr/bin/env bash
+set -euo pipefail
 
+echo "→ Working in: $PWD"
+
+DOCKER_DIR="./docker"
+AGENT_DIR="$DOCKER_DIR/portainer-agent"
+mkdir -p "$AGENT_DIR"
+echo "✓ Ensured $AGENT_DIR exists"
+
+COMPOSE_FILE="$AGENT_DIR/docker-compose.yml"
+if [[ -f "$COMPOSE_FILE" ]]; then
+  cp -f "$COMPOSE_FILE" "$COMPOSE_FILE.bak.$(date +%s)"
+  echo "ℹ️  Existing docker-compose.yml found. Backed up."
+fi
+
+cat > "$COMPOSE_FILE" <<'YAML'
+services:
+  agent:
+    image: portainer/agent:latest
+    container_name: portainer-agent
+    restart: unless-stopped
+    ports:
+      - "9001:9001"     # Agent listens here
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /var/lib/docker/volumes:/var/lib/docker/volumes
+YAML
+
+echo "✓ Wrote $COMPOSE_FILE"
+
+if command -v docker >/dev/null 2>&1 && docker compose version >/dev/null 2>&1; then
+  COMPOSE_CMD="docker compose"
+elif command -v docker-compose >/dev/null 2>&1; then
+  COMPOSE_CMD="docker-compose"
+else
+  echo "❌ Docker Compose not found."
+  exit 1
+fi
+
+echo "→ Running: $COMPOSE_CMD up -d"
+(
+  cd "$AGENT_DIR"
+  $COMPOSE_CMD up -d
+)
+
+echo "🎉 Done! Portainer Agent is running on port 9001."
+```
 
 
 ## Terminal Setup
