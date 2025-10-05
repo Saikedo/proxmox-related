@@ -86,3 +86,16 @@ To reconfigure styles at any point
 ```bash
 p10k configure
 ```
+
+
+## 🚀 Network Share
+```bash
+sudo apt install cifs-utils
+sudo nano /etc/fstab
+```
+
+# proceed to add this to remote shares
+```bash
+# Remote Shares
+//10.0.0.100/data /data cifs uid=1000,gid=1000,username=user,password=password,iocharset=utf8 0 0
+```
